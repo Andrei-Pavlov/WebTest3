@@ -15,6 +15,6 @@
         <h1>Hello Worlad!</h1>
         <a href="page2">page2</a><br>
         <a href="page1.jsp">page1</a><br>
-        <a href="reader.jsp">reader</a>
+        <a href="reader">reader</a>
     </body>
 </html>

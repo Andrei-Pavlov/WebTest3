@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author pupil
  */
-@WebServlet(urlPatterns = {"/MyServlet","/page2","/bookspage","/reader"})
+@WebServlet(urlPatterns = {"/MyServlet","/page2","/bookspage","/reader","/listbooks"})
 public class MyServlet extends HttpServlet {
 
     /**
@@ -40,6 +40,9 @@ public class MyServlet extends HttpServlet {
             request.setAttribute("inf", "Эта информация передана из жава в жсп страницу");
             request.getRequestDispatcher("/WEB-INF/page2.jsp").forward(request,response);
         }
+        if("/listbooks".equals(request.getServletPath())){
+            request.getRequestDispatcher("/listbooks.jsp").forward(request,response);
+        }
         if("/bookspage".equals(request.getServletPath())){
             Author author = new Author();
             author.setFirstname("Tolstoi ");
@@ -55,9 +58,27 @@ public class MyServlet extends HttpServlet {
             List<Books> books = new ArrayList<>();
             books.add(book);
             author.setBooks(books);
-            request.setAttribute("books", book);
+            Books book1 = new Books();
+            book1.setName("zolotoi telonok");
+            book1.setCount(2);
+            book1.setQuantity(2);
+            book1.setPublishedYear(2022);
+            Author author1 = new Author();
+            author1.setFirstname("alja");
+            author1.setLastname("kulja");
+            Author author2 = new Author();
+            author2.setLastname("Petrov");
+            author2.setFirstname("Evgeniy");
+            book1.getAuthors().add(author1);
+            book1.getAuthors().add(author2);
+            author1.getBooks().add(book1);
+            author2.getBooks().add(book1);
+            books.add(book1);
+            
+            
+            request.setAttribute("books", books);
 //            request.setAttribute("author", author.getFirstname()+author.getLastname());
-            request.getRequestDispatcher("/bookspage.jsp").forward(request,response);
+            request.getRequestDispatcher("/listbooks.jsp").forward(request,response);
         }
         if ("/reader".equals(request.getServletPath())){
             Reader reader = new Reader();
